@@ -4,9 +4,13 @@ on:
     branches: ["*"]
   pull_request:
     branches: ["*"]
-
-steps:
-  - uses: actions/checkout@v2
-  - uses: laughedelic/coursier-setup@v1
-  - name: Reproduction
-    run: ./repro.sh
+jobs:
+  build:
+    strategy:
+      fail-fast: false
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: laughedelic/coursier-setup@v1
+      - name: Reproduction
+        run: ./repro.sh
