@@ -13,4 +13,4 @@ jobs:
       - uses: actions/checkout@v2
       - uses: laughedelic/coursier-setup@v1
       - name: Reproduction
-        run: ./repro.sh
+        run: bash ./repro.sh
