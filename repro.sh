@@ -17,16 +17,19 @@ SCALA_JS_COMPILER_PLUGIN_CLASSPATH=$(cs fetch -p org.scala-js:scalajs-compiler_$
 
 MDOC_OPTS_FOLDER=$(mktemp -d)
 
+MDOC_REUSE_LINKER="${MDOC_REUSE_LINKER:-true}"
+
 echo "js-classpath=$SCALA_JS_LIBRARY_CLASSPATH:$SCALA_JS_DOM_CLASSPATH" >> $MDOC_OPTS_FOLDER/mdoc.properties
 echo "js-scalac-options=-Xplugin:$SCALA_JS_COMPILER_PLUGIN_CLASSPATH" >> $MDOC_OPTS_FOLDER/mdoc.properties
+echo "js-reuse-linker=$MDOC_REUSE_LINKER" >> $MDOC_OPTS_FOLDER/mdoc.properties
 
 echo $MDOC_OPTS_FOLDER
 
 # ------------- Mdoc classpath 
 
-MDOC_VERSION="2.2.16"
+MDOC_VERSION="${MDOC_VERSION_OVERRIDE:-"2.2.12"}"
 
-MDOC_CLASSPATH=$(cs fetch -p org.scalameta::mdoc-js:$MDOC_VERSION)
+MDOC_CLASSPATH=$(cs fetch -p org.scalameta:mdoc-js_$SCALA_BINARY_VERSION:$MDOC_VERSION)
 
 
 # ------------- REPRODUCTION
