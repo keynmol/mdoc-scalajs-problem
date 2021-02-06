@@ -17,13 +17,16 @@ SCALA_JS_COMPILER_PLUGIN_CLASSPATH=$(cs fetch -p org.scala-js:scalajs-compiler_$
 
 MDOC_OPTS_FOLDER=$(mktemp -d)
 
-MDOC_REUSE_LINKER="${MDOC_REUSE_LINKER:-true}"
+MDOC_BATCH_MODE="${MDOC_BATCH_MODE:-false}"
 
 echo "js-classpath=$SCALA_JS_LIBRARY_CLASSPATH:$SCALA_JS_DOM_CLASSPATH" >> $MDOC_OPTS_FOLDER/mdoc.properties
 echo "js-scalac-options=-Xplugin:$SCALA_JS_COMPILER_PLUGIN_CLASSPATH" >> $MDOC_OPTS_FOLDER/mdoc.properties
-echo "js-reuse-linker=$MDOC_REUSE_LINKER" >> $MDOC_OPTS_FOLDER/mdoc.properties
+echo "js-batch-mode=$MDOC_BATCH_MODE" >> $MDOC_OPTS_FOLDER/mdoc.properties
 
 echo $MDOC_OPTS_FOLDER
+
+echo "Using the following mdoc.properties:"
+cat $MDOC_OPTS_FOLDER/mdoc.properties
 
 # ------------- Mdoc classpath 
 
